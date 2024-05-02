@@ -6,22 +6,23 @@ import { Button } from "@/components/ui/button";
 
 const CryptoAssets = () => {
   const [cryptoAssetid, setCryptoAssetid] = useState("1");
-  const [cryptoAsset, setCryptoAsset] = useState<{
-    id: string;
-    isWhitelisted: string;
-    assetTickName: string;
-    intitalPrice: string;
-    TOKEN_DECIMALS_PRECISION: string;
-    TOKEN_PRICE_PRECISION: string;
-    isIsolatedPoolAllowed: string;
-    isSharedPoolAllowed: string;
-    isDecentralisedSourceEnabled: string;
-    isCentralisedSourceEnabled: string;
-  }>();
+  const [cryptoAsset, setCryptoAsset] = useState(null);
 
   const handelCrytoAssetSubmit = async () => {
-    const response = await getCryptoAssets(cryptoAssetid);
-    setCryptoAsset(response);
+    try {
+      const response = await getCryptoAssets(cryptoAssetid);
+      if (response && 'id' in response && 'isWhitelisted' in response &&
+          'assetTickName' in response && 'intitalPrice' in response &&
+          'TOKEN_DECIMALS_PRECISION' in response && 'TOKEN_PRICE_PRECISION' in response &&
+          'isIsolatedPoolAllowed' in response && 'isSharedPoolAllowed' in response &&
+          'isDecentralisedSourceEnabled' in response && 'isCentralisedSourceEnabled' in response) {
+        setCryptoAsset(response);
+      } else {
+        throw new Error('Unexpected response format');
+      }
+    } catch (error) {
+      console.error('Error fetching crypto assets:', error);
+    }
   };
 
   return (
