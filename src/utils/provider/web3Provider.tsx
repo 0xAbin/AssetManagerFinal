@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
 
-const ARB_SEP_RPC  = "https://endpoints.omniatech.io/v1/arbitrum/sepolia/public";
+const ARB_SEP_RPC  = "https://arb-sepolia.g.alchemy.com/v2/0VujL5kt_QI0Xt7fT5Xy8FCekacxPPC_";
 const WALLETCONNECT = "b3e275bd03d0f994672d0823110b5edf"
 
 const config = createConfig(
